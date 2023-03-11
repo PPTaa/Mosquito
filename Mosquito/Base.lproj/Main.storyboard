@@ -17,37 +17,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBZ-Fn-d3V">
-                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQ3-b7-S2y">
+                                <rect key="frame" x="12" y="46.999999999999986" width="366" height="172.66666666666663"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJ3-z7-41m">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="700"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" priority="250" constant="700" id="HUG-4S-gnG"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주간 모기터링" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hzp-r0-uYi">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="28.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ex-Nn-6mV" customClass="LineChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="37.666666666666671" width="366" height="135"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="iJ3-z7-41m" firstAttribute="top" secondItem="B0b-8S-REz" secondAttribute="top" id="AfO-Mr-JHn"/>
-                                    <constraint firstItem="iJ3-z7-41m" firstAttribute="bottom" secondItem="B0b-8S-REz" secondAttribute="bottom" id="PfM-0Z-aTI"/>
-                                    <constraint firstItem="iJ3-z7-41m" firstAttribute="leading" secondItem="B0b-8S-REz" secondAttribute="leading" id="Vai-rV-5kB"/>
-                                    <constraint firstItem="iJ3-z7-41m" firstAttribute="width" secondItem="Rpr-Fx-Gtq" secondAttribute="width" id="hcZ-lb-U2p"/>
-                                    <constraint firstItem="iJ3-z7-41m" firstAttribute="trailing" secondItem="B0b-8S-REz" secondAttribute="trailing" id="jWh-7u-gpP"/>
+                                    <constraint firstAttribute="width" secondItem="rQ3-b7-S2y" secondAttribute="height" multiplier="350:165" id="8ZL-iR-rs8"/>
+                                    <constraint firstItem="Hzp-r0-uYi" firstAttribute="top" secondItem="rQ3-b7-S2y" secondAttribute="top" id="LhO-UC-BRd"/>
+                                    <constraint firstAttribute="trailing" secondItem="4ex-Nn-6mV" secondAttribute="trailing" id="fHw-dE-9aB"/>
+                                    <constraint firstAttribute="bottom" secondItem="4ex-Nn-6mV" secondAttribute="bottom" id="ggf-bP-TAb"/>
+                                    <constraint firstItem="4ex-Nn-6mV" firstAttribute="leading" secondItem="rQ3-b7-S2y" secondAttribute="leading" id="hZ5-QH-7dN"/>
+                                    <constraint firstItem="Hzp-r0-uYi" firstAttribute="leading" secondItem="rQ3-b7-S2y" secondAttribute="leading" id="mFV-h6-h82"/>
+                                    <constraint firstItem="4ex-Nn-6mV" firstAttribute="top" secondItem="Hzp-r0-uYi" secondAttribute="bottom" constant="9" id="qVf-rD-Y5p"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="B0b-8S-REz"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="Rpr-Fx-Gtq"/>
-                            </scrollView>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WiG-md-vSO">
+                                <rect key="frame" x="12" y="235.66666666666669" width="366" height="530.33333333333326"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 모기예보" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbp-zP-Ked">
+                                        <rect key="frame" x="0.0" y="0.0" width="150.66666666666666" height="28.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5a-wN-FQS">
+                                        <rect key="frame" x="0.0" y="37.666666666666657" width="366" height="492.66666666666674"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="N5a-wN-FQS" secondAttribute="bottom" id="452-cn-8tN"/>
+                                    <constraint firstItem="N5a-wN-FQS" firstAttribute="leading" secondItem="WiG-md-vSO" secondAttribute="leading" id="Umc-Sk-v6o"/>
+                                    <constraint firstAttribute="trailing" secondItem="N5a-wN-FQS" secondAttribute="trailing" id="Wsm-ap-lyG"/>
+                                    <constraint firstItem="Vbp-zP-Ked" firstAttribute="leading" secondItem="WiG-md-vSO" secondAttribute="leading" id="bLN-fF-p5c"/>
+                                    <constraint firstItem="Vbp-zP-Ked" firstAttribute="top" secondItem="WiG-md-vSO" secondAttribute="top" id="iWG-wr-oE8"/>
+                                    <constraint firstItem="N5a-wN-FQS" firstAttribute="top" secondItem="Vbp-zP-Ked" secondAttribute="bottom" constant="9" id="zBY-7f-RwF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="iBZ-Fn-d3V" secondAttribute="bottom" id="3jk-hN-UQA"/>
-                            <constraint firstItem="iBZ-Fn-d3V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4b5-bu-z6N"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iBZ-Fn-d3V" secondAttribute="trailing" id="loH-Yj-fe6"/>
-                            <constraint firstItem="iBZ-Fn-d3V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yjo-02-BH5"/>
+                            <constraint firstItem="rQ3-b7-S2y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="2t2-qe-2Nt"/>
+                            <constraint firstItem="WiG-md-vSO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="4ur-wx-tap"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rQ3-b7-S2y" secondAttribute="trailing" constant="12" id="4y2-EM-diQ"/>
+                            <constraint firstItem="WiG-md-vSO" firstAttribute="top" secondItem="rQ3-b7-S2y" secondAttribute="bottom" constant="16" id="I9w-aV-WTx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WiG-md-vSO" secondAttribute="bottom" constant="44" id="Tyz-Tg-bUY"/>
+                            <constraint firstItem="rQ3-b7-S2y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lr1-yM-Kbq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WiG-md-vSO" secondAttribute="trailing" constant="12" id="odg-yd-Bmh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lineChartView" destination="4ex-Nn-6mV" id="HaW-y5-I3b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,6 +91,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
