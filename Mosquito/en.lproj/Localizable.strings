@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  Mosquito
+
+  Created by leejungchul on 2023/03/13.
+  
+*/
+
+"stage1" = "1단계";
+"stageString1" = "쾌적";
+"stage1MosquitoNum" = "일 평균 모기 개체수 0이상 ~ 25미만";
+"stage1-1" = "모기침입경로 보완, 방충망 사용";
+"stage1-2" = "별도의 모기 방제방법이 필요하지 않음";
+
+"stage2" = "2단계";
+"stageString2" = "관심";
+"stage2MosquitoNum" = "일 평균 모기 개체수 25이상 ~ 50미만";
+"stage2-1" = "문과 방충망 등 모기 침입통로 수리";
+"stage2-2" = "주변 모기 발생원 및 서식처 비우기, 정화조 및 환기구에 설치";
+
+"stage3" = "3단계";
+"stageString3" = "주의";
+"stage3MosquitoNum" = "일 평균 모기 개체수 50이상 ~ 75미만";
+"stage3-1" = "고인 물 비우기, 침대에 모기장 사용";
+"stage3-2" = "모기유충 서식처 차단, 집주변 모기 발견시 에어로절 방제, 야외 활동시 모기퇴치제 사용";
+
+"stage4" = "4단계";
+"stageString4" = "불쾌";
+"stage4MosquitoNum" = "일 평균 모기 개체수 75이상 ~";
+"stage4-1" = "야외활동 자제 및 침대에 모기장 사용";
+"stage4-2" = "집주변 가정용 살충제 처리, 야외활동시 반드시 퇴치제 및 기피제 사용 대형 모기 발생원 보건소에 신고";

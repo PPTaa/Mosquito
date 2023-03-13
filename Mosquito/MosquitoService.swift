@@ -19,22 +19,19 @@ struct MosquitoService {
     }()
     
     // http://openapi.seoul.go.kr:8088/sample/xml/MosquitoStatus/1/5/
-    func getMosquitoInfo(closure: @escaping (Error?) -> ()) {
+    func getMosquitoInfo(date: Date, closure: @escaping (Error?, Mosquito?) -> ()) {
         let key = "6e62564f4632337039366961457369"
-        let date = dateFormatter.string(from: Date())
+        let date = dateFormatter.string(from: date)
         print(date)
         let url = "http://openapi.seoul.go.kr:8088/\(key)/json/MosquitoStatus/1/5/\(date)"
         
-//        http://openapi.seoul.go.kr:8088/6e62564f4632337039366961457369/json/MosquitoStatus/1/5/20230307
-        
-        AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "").responseString { response in
+        AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "").responseDecodable(of: Mosquito.self) { response in
             print(response)
             switch response.result {
             case .success(let data):
-                print(data)
+                closure(nil, data)
             case .failure(let error):
-                print(error)
-                closure(error)
+                closure(error, nil)
             }
         }
     }
