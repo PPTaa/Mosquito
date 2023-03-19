@@ -99,10 +99,10 @@ class HomeViewController: UIViewController {
         todayData = mosquitoDataList.first(where: {
             $0.row[0].mosquitoDate == todayString
         })
-        print(#function, todayData)
+//        print(#function, todayData)
         // 지수 및 단계 Setting
-//        let score = Double(todayData?.row[0].mosquitoValueHouse ?? "0.0")!
-        let score = CGFloat(Int.random(in: 0...100))
+        let score = Double(todayData?.row[0].mosquitoValueHouse ?? "0.0")!
+//        let score = CGFloat(Int.random(in: 0...100))
         let stage = viewModel.getTodayStage(score: score)
         
         // cardView Setting
