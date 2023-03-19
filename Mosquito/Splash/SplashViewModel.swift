@@ -28,7 +28,6 @@ class SplashViewModel {
     func getMosquitoInfo() {
         let now = Date()
         print(#function)
-//        self.didMosquitoInfoEnd?()
         for i in 0 ..< 7 {
             let date = Calendar.current.date(byAdding: .day, value: -i, to: now)!
             if let existData = UserDefaults.standard.object(forKey: dateFormatter.string(from: date)) as? Data {

@@ -14,13 +14,31 @@ final class HomeViewModel {
         self.service = service
     }
     
+    var didUpdateError: ((Error?) -> ())?
     var didMosquitoInfoEnd: (() -> ())?
     
     func getMosquitoInfo() {
         print(#function)
         let now = Date()
         service.getMosquitoInfo(date: now) { error, data in
-            data
+            if let error = error {
+                self.didUpdateError?(error)
+            } else {
+                MosquitoSingleton.shared.mosquitoDataList.removeAll {
+                    $0.row[0].mosquitoDate == data?.mosquitoStatus?.row[0].mosquitoDate
+                }
+                guard let appendData = data?.mosquitoStatus else {
+                    self.didUpdateError?(error)
+                    return
+                }
+                MosquitoSingleton.shared.mosquitoDataList.append(appendData)
+                MosquitoSingleton.shared.mosquitoDataList.sort {
+                    $0.row[0].mosquitoDate < $1.row[0].mosquitoDate
+                }
+                print(MosquitoSingleton.shared.mosquitoDataList)
+                
+                self.didMosquitoInfoEnd?()
+            }
             
         }
     }

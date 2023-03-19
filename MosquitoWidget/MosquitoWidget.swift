@@ -10,33 +10,73 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
+    // 데이터를 불러오기 전에 표출될 placeholder
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        let stageImage = getTodayStage(score: -1)
+        return SimpleEntry(date: Date(), stageImage: stageImage, configuration: ConfigurationIntent())
     }
-
+    
+    // 데이터 로드 담당 메소드
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
-        completion(entry)
+        getMosquitoData(date: Date()) { stage in
+            let entry = SimpleEntry(date: Date(), stageImage: stage, configuration: configuration)
+            completion(entry)
+        }
     }
 
+    // 데이터를 언제 리프레시 할지 결정
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+        getMosquitoData(date: Date()) { stage in
+            let currentDate = Date()
+            let entry = SimpleEntry(date: Date(), stageImage: stage, configuration: configuration)
+            let nextRefresh = Calendar.current.date(byAdding: .hour, value: 2, to: currentDate)!
+            let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
+            completion(timeline)
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+    }
+    
+    private func getMosquitoData(date: Date, completion: @escaping (UIImage) -> ()) {
+        MosquitoService().getMosquitoInfo(date: date) { error, data in
+            if let error = error {
+                let stage = getTodayStage(score: 1)
+                completion(stage)
+            } else {
+                guard let mosquitoData = data?.mosquitoStatus?.row[0] else {
+                    let stage = getTodayStage(score: -1)
+                    completion(stage)
+                    return
+                }
+                let score = Double(mosquitoData.mosquitoValueHouse) ?? 0.0
+                let stage = getTodayStage(score: CGFloat(score))
+                completion(stage)
+            }
+        }
+    }
+    
+    private func getTodayStage(score: CGFloat) -> UIImage {
+        let stage: Int
+        switch score {
+        case -1:
+            stage = 5
+        case 0...24.9 :
+            stage = 1
+        case 25.0...49.9 :
+            stage = 2
+        case 50.0...74.9 :
+            stage = 3
+        case 75.0... :
+            stage = 4
+        default:
+            stage = 1
+        }
+        return UIImage(named: "widgetStage\(stage)") ?? UIImage()
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let stageImage: UIImage
     let configuration: ConfigurationIntent
 }
 
@@ -44,7 +84,10 @@ struct MosquitoWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+//        Text(entry.date, style: .time)
+        Image(uiImage: entry.stageImage)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
     }
 }
 
@@ -56,14 +99,14 @@ struct MosquitoWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             MosquitoWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("웽웽 위젯")
+        .description("웽웽의 위젯입니다.")
     }
 }
 
 struct MosquitoWidget_Previews: PreviewProvider {
     static var previews: some View {
-        MosquitoWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        MosquitoWidgetEntryView(entry: SimpleEntry(date: Date(), stageImage: UIImage(named: "widgetStage5")!, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
