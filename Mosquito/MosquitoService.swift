@@ -22,11 +22,11 @@ struct MosquitoService {
     func getMosquitoInfo(date: Date, closure: @escaping (Error?, Mosquito?) -> ()) {
         let key = "6e62564f4632337039366961457369"
         let date = dateFormatter.string(from: date)
-        print(date)
+//        print(date)
         let url = "http://openapi.seoul.go.kr:8088/\(key)/json/MosquitoStatus/1/5/\(date)"
         
         AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "").responseDecodable(of: Mosquito.self) { response in
-            print(response)
+//            print(response)
             switch response.result {
             case .success(let data):
                 closure(nil, data)

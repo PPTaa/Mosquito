@@ -64,23 +64,17 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("HomeViewController--",MosquitoSingleton.shared.mosquitoDataList)
-        
 //        attribute()
         bind()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function, "HomeViewController")
-        
-        // labelSetting
         attribute()
     
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print(self.view.frame.width)
         let width = self.view.frame.width
         if width <= 375 {
             stageMosquitoNumLabel.font = UIFont(name: "Pretendard-SemiBold", size: 18)
@@ -116,8 +110,8 @@ class HomeViewController: UIViewController {
         let startDate = timeFormatter.date(from: startTimeString)!
         let endTimeString = todayString + " 03:00"
         let endDate = timeFormatter.date(from: endTimeString)!
-        print("startDate", Date(), startDate, Date() > startDate, Date() < startDate)
-        print("endDate", Date(), endDate, Date() > endDate, Date() < endDate)
+//        print("startDate", Date(), startDate, Date() > startDate, Date() < startDate)
+//        print("endDate", Date(), endDate, Date() > endDate, Date() < endDate)
         if (Date() > startDate && Date() < endDate) || todayData == nil {
             backgroundImageView.image = UIImage(named: "backGround5")
             title1.textColor = .white
@@ -196,7 +190,7 @@ class HomeViewController: UIViewController {
             // 아이콘 이미지 설정
             let value = ChartDataEntry(x: Double(idx), y: Double(data.row[0].mosquitoValueHouse)!)
             let xAxis = (data.row[0].mosquitoDate).components(separatedBy: "-")
-            print(value, xAxis)
+//            print(value, xAxis)
             xAxisStringList.append("\(xAxis[1]).\(xAxis[2])")
             lineChartEntry.append(value)
         }
@@ -286,7 +280,6 @@ class HomeViewController: UIViewController {
 
     
     @IBAction func tapCardView(_ sender: UIButton) {
-        print(self.view.frame)
         sender.isSelected = !sender.isSelected
         
         UIView.animateKeyframes(withDuration: 0.5, delay: 0) {
@@ -347,8 +340,6 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func imageSaveEnd(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        print(#function)
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             LoadingHUD.hide()
             if let error = error {

@@ -8,37 +8,6 @@
 import UIKit
 import Lottie
 
-class LoadingViewController: UIViewController {
-    
-    // 1. Create the AnimationView
-    private var animationView: LottieAnimationView?
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        attribute()
-    }
-    
-    private func attribute() {
-        // 2. Start AnimationView with animation name (without extension)
-        animationView = .init(name: "juggling")
-        animationView!.frame = view.bounds
-
-        // 3. Set animation content mode
-        animationView!.contentMode = .scaleAspectFit
-
-        // 4. Set animation loop mode
-        animationView!.loopMode = .loop
-
-        // 5. Adjust animation speed
-        animationView!.animationSpeed = 0.5
-        view.addSubview(animationView!)
-
-        // 6. Play animation
-        animationView!.play()
-    }
-    
-}
 class LoadingHUD {
     private static let sharedInstance = LoadingHUD()
     
@@ -54,7 +23,7 @@ class LoadingHUD {
 //        containerView.backgroundColor = UIColor.cyan
     
         // 2. Start AnimationView with animation name (without extension)
-        animationView = .init(name: "juggling")
+        animationView = .init(name: "loading2")
         animationView.frame = containerView.bounds
 
         // 3. Set animation content mode
@@ -64,7 +33,7 @@ class LoadingHUD {
         animationView.loopMode = .loop
 
         // 5. Adjust animation speed
-        animationView.animationSpeed = 0.5
+        animationView.animationSpeed = 1.0
         containerView.addSubview(animationView)
         
         backView.addSubview(containerView)

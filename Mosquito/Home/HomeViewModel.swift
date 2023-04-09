@@ -18,7 +18,6 @@ final class HomeViewModel {
     var didMosquitoInfoEnd: (() -> ())?
     
     func getMosquitoInfo() {
-        print(#function)
         let now = Date()
         service.getMosquitoInfo(date: now) { error, data in
             if let error = error {
@@ -35,7 +34,6 @@ final class HomeViewModel {
                 MosquitoSingleton.shared.mosquitoDataList.sort {
                     $0.row[0].mosquitoDate < $1.row[0].mosquitoDate
                 }
-                print(MosquitoSingleton.shared.mosquitoDataList)
                 
                 self.didMosquitoInfoEnd?()
             }
