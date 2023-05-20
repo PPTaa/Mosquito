@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Constants {
     struct GoogleAds {
         /* SAMPLE KEY
@@ -24,5 +25,9 @@ struct Constants {
         
         static let realBannerAdKey = "ca-app-pub-7356550203877926/9905876578"
 
+    }
+    
+    struct API_KEY {
+        static let mosquitoApiKey = "6e62564f4632337039366961457369"
     }
 }

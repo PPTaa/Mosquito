@@ -26,9 +26,12 @@ final class SplashViewController: UIViewController {
         homeVC.modalPresentationStyle = .fullScreen
         viewModel.didMosquitoInfoEnd = { [weak self] in
 //            print(#function)
-            
+            let testGameVC = GameViewController()
+            testGameVC.modalTransitionStyle = .crossDissolve
+            testGameVC.modalPresentationStyle = .fullScreen
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self?.present(homeVC, animated: true)
+//                self?.present(homeVC, animated: true)
+                self?.present(testGameVC, animated: true)
             }
         }
     }
