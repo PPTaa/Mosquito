@@ -44,5 +44,9 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>웽웽은 이미지 저장을 선택하신 사용자들의 사진을 저장하기 위해서만 앨범에 접근합니다.
 앨범에 저장하신 사진을 자유롭게 사용해 보세요.</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-7356550203877926~2310172170</string>
+	<key>GADIsAdManagerApp</key>
+	<true/>
 </dict>
 </plist>

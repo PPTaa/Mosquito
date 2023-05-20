@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import Charts
+import GoogleMobileAds
 
 class HomeViewController: UIViewController {
 
@@ -43,6 +44,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var iconBottomToLabelTop: NSLayoutConstraint!
     @IBOutlet weak var labelBottomToViewTop: NSLayoutConstraint!
     
+    private var bannerView: GADBannerView!
+    
     private let viewModel = HomeViewModel(service: MosquitoService())
     private var todayData: MosquitoStatus?
     
@@ -67,7 +70,37 @@ class HomeViewController: UIViewController {
 //        attribute()
         bind()
         
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+//        bannerView.adUnitID = Constants.GoogleAds.sampleBannderAdKey
+        bannerView.adUnitID = Constants.GoogleAds.realBannerAdKey
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
+        addBannerViewToView(bannerView)
     }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                              attribute: .bottom,
+                              relatedBy: .equal,
+                              toItem: view.safeAreaLayoutGuide,
+                              attribute: .bottom,
+                              multiplier: 1,
+                              constant: 0),
+            NSLayoutConstraint(item: bannerView,
+                              attribute: .centerX,
+                              relatedBy: .equal,
+                              toItem: view,
+                              attribute: .centerX,
+                              multiplier: 1,
+                              constant: 0)
+            ])
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         attribute()
@@ -357,3 +390,11 @@ class HomeViewController: UIViewController {
     
 }
 
+extension HomeViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            bannerView.alpha = 1
+        })
+    }
+}

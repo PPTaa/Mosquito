@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GoogleMobileAds
+import AdSupport
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        print("IDFA",
+            ASIdentifierManager.shared().advertisingIdentifier
+        )
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
     }
 
